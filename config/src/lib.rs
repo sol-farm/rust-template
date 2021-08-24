@@ -1,6 +1,8 @@
 use anyhow::Result;
 use serde::{Deserialize, Serialize};
 use simplelog::*;
+use solana_client::rpc_client::RpcClient;
+use solana_sdk::signature::{Keypair, read_keypair_file};
 use std::{fs::File};
 use std::{fs};
 /// main configuration object
@@ -10,6 +12,7 @@ pub struct Configuration {
     pub db_url: String,
     pub log_file: String,
     pub debug_log: bool,
+    pub rpc_url: String,
 }
 
 
@@ -35,6 +38,12 @@ impl Configuration {
             serde_yaml::from_slice(data.as_slice())?
         };
         Ok(config)
+    }
+    pub fn rpc_client(&self) -> RpcClient {
+        RpcClient::new(self.rpc_url.to_string())
+    }
+    pub fn payer(&self) -> Keypair {
+        read_keypair_file(self.key_path.clone()).expect("failed to read keypair file")
     }
     /// if file_log is true, log to both file and stdout
     /// otherwise just log to stdout
@@ -111,6 +120,7 @@ impl Default for Configuration {
             db_url: "postgres://postgres:necc@postgres/kek".to_string(),
             log_file: "template.log".to_string(),
             debug_log: false,
+            rpc_url: "https://solana-api.projectserum.com".to_string()
         }
     }
 }
