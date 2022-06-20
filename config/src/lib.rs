@@ -2,9 +2,9 @@ use anyhow::Result;
 use serde::{Deserialize, Serialize};
 use simplelog::*;
 use solana_client::rpc_client::RpcClient;
-use solana_sdk::signature::{Keypair, read_keypair_file};
-use std::{fs::File};
-use std::{fs};
+use solana_sdk::signature::{read_keypair_file, Keypair};
+use std::fs;
+use std::fs::File;
 /// main configuration object
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct Configuration {
@@ -14,7 +14,6 @@ pub struct Configuration {
     pub debug_log: bool,
     pub rpc_url: String,
 }
-
 
 impl Configuration {
     pub fn new(path: &str, as_json: bool) -> Result<()> {
@@ -120,7 +119,7 @@ impl Default for Configuration {
             db_url: "postgres://postgres:necc@postgres/kek".to_string(),
             log_file: "template.log".to_string(),
             debug_log: false,
-            rpc_url: "https://solana-api.projectserum.com".to_string()
+            rpc_url: "https://solana-api.projectserum.com".to_string(),
         }
     }
 }
