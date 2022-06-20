@@ -6,7 +6,7 @@ use solana_sdk::signature::{read_keypair_file, Keypair};
 use std::fs;
 use std::fs::File;
 /// main configuration object
-#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub struct Configuration {
     pub key_path: String,
     pub db_url: String,

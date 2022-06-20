@@ -1,4 +1,4 @@
-use anyhow::{anyhow, Result};
+use anyhow::{Result};
 use config::Configuration;
 
 pub fn new_config(_matches: &clap::ArgMatches, config_file_path: String) -> Result<()> {
@@ -8,7 +8,7 @@ pub fn new_config(_matches: &clap::ArgMatches, config_file_path: String) -> Resu
 
 pub fn export_as_json(_matches: &clap::ArgMatches, config_file_path: String) -> Result<()> {
     let config = Configuration::load(config_file_path.as_str(), false)?;
-    let name_parts: Vec<&str> = config_file_path.split(".").collect();
+    let name_parts: Vec<&str> = config_file_path.split('.').collect();
     let mut name = String::new();
     name.push_str(name_parts[0]);
     name.push_str(".json");

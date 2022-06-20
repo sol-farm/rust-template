@@ -2,7 +2,7 @@
 static GLOBAL: jemallocator::Jemalloc = jemallocator::Jemalloc;
 use anyhow::{anyhow, Result};
 use clap::{App, Arg, SubCommand};
-use tokio;
+
 mod config;
 
 #[tokio::main]
